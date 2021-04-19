@@ -69,7 +69,7 @@ async function main() {
     // https://github.community/t5/GitHub-Actions/quot-Resource-not-accessible-by-integration-quot-for-adding-a/td-p/33925
     const resultsAsObject = convertToTableObject(myOutput);
     console.table(resultsAsObject);
-    console.log("Failed to comment");
+    console.log("Failed to comment", e);
     core.debug(e);
     core.debug("Failed to comment");
   }
