@@ -53,8 +53,6 @@ async function main() {
     const resultsAsObject = convertToTableObject(myOutput);
     console.table(resultsAsObject);
 
-    console.log("Failed to comment");  
-
     core.debug(e);
     core.debug("Failed to comment");
   }
