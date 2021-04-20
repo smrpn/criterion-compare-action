@@ -58,9 +58,8 @@ async function main() {
 
   try {
     await octokit.issues.createComment({
-      owner: contextObj.owner,
-      repo: contextObj.repo,
-      issue_number: contextObj.number,
+      ...context.repo,
+      issue_number: context.payload.pull_request.number,
       body: resultsAsMarkdown,
     });
   } catch (e) {
@@ -69,7 +68,7 @@ async function main() {
     // https://github.community/t5/GitHub-Actions/quot-Resource-not-accessible-by-integration-quot-for-adding-a/td-p/33925
     const resultsAsObject = convertToTableObject(myOutput);
     console.table(resultsAsObject);
-    console.log("Failed to comment", e);
+    console.log("Failed to comment\n", e);
     core.debug(e);
     core.debug("Failed to comment");
   }
