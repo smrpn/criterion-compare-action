@@ -1,6 +1,7 @@
 const exec = require("@actions/exec");
 const core = require("@actions/core");
 const github = require("@actions/github");
+const fs = require("fs");
 
 const context = github.context;
 
@@ -67,6 +68,10 @@ async function main() {
     // forkedRepos only have READ ONLY access on GITHUB_TOKEN
     // https://github.community/t5/GitHub-Actions/quot-Resource-not-accessible-by-integration-quot-for-adding-a/td-p/33925
     const resultsAsObject = convertToTableObject(myOutput);
+    
+    fs.writeFile('benchResults.txt', resultsAsObject, (err) => {
+        if (err) throw err;
+    });
     console.table(resultsAsObject);
     console.log("Failed to comment\n", e);
     core.debug(e);
